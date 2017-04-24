@@ -68,3 +68,64 @@ var idUsuarios = Rx.Observable.create((leerNuevosUsuarios) => {
 idUsuarios.subscribe((usuarioId) => {
     actualizaNotificaciones((usuarioId));
 });
+
+
+ 
+ class Singleton {
+
+    constructor (data) {
+      
+        if(!Singleton._singleton) {
+            this.data = data
+            Singleton._singleton = this
+        }
+        else
+            return Singleton._singleton
+        console.log("Singleton class created")
+    }
+
+    SingletonOperation () {
+        console.log('SingletonOperation')
+    }
+
+    GetSingletonData () {
+        return this.data
+    }
+}
+
+function init_Singleton() {
+    var singleton1 = new Singleton("data1")
+    var singleton2 = new Singleton("data2")
+    console.log(singleton1.GetSingletonData())
+    console.log(singleton2.GetSingletonData())
+    console.log(singleton1 instanceof Singleton)
+    console.log(singleton2 instanceof Singleton)
+    console.log(singleton1 === singleton2)
+}
+
+init_Singleton();
+
+
+
+class Person {
+    constructor() {
+        if (typeof Person.instance === 'object') {
+            return Person.instance;
+        }
+        Person.instance = this;
+        return this;
+    }
+}
+
+module.exports = Person;
+
+function init_Singleton2() {
+    var john = new Person();
+    var john2 = new Person();
+
+    console.log(john instanceof Person)
+    console.log(john2 instanceof Person)
+    console.log(john === john2)
+}
+
+init_Singleton2();
